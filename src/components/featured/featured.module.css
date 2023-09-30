@@ -5,6 +5,7 @@
 .title {
   font-size: 5rem;
   font-weight: 400;
+  margin-bottom: 2rem;
 }
 
 .post {
@@ -46,4 +47,27 @@
   font-weight: 500;
   border-radius: 0.2rem;
   cursor: pointer;
+}
+@media screen and (max-width: 1280px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .imageContainer {
+    display: none;
+  }
+}
+@media screen and (max-width: 728px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 640px) {
+  .title {
+    font-size: 1.7rem;
+  }
 }

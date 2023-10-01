@@ -1,3 +1,14 @@
 .container {
-  background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 10px 20px;
+  width: 100px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: crimson;
+  color: white;
 }

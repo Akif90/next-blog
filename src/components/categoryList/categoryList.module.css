@@ -46,6 +46,9 @@
 .category.culture {
   background-color: #e8998831;
 }
+.category.fashion {
+  background-color: #4d6c9f28;
+}
 
 @media screen and (max-width: 1280px) {
   .category {

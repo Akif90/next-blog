@@ -2,10 +2,10 @@
 import React, {useState} from "react";
 import styles from "./authLink.module.css";
 import Link from "next/link";
-import {signOut} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 
 const AuthLink = () => {
-  const status = "authenticated";
+  const {status} = useSession();
   const [open, setOpen] = useState(false);
   return (
     <>

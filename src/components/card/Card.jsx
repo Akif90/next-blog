@@ -3,16 +3,16 @@ import React from "react";
 import styles from "./card.module.css";
 import Link from "next/link";
 
-const Card = () => {
+const Card = ({key, item}) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} key={key}>
       <div className={styles.imageContainer}>
-        <Image className={styles.image} src="/p1.jpeg" alt="" fill />
+        <Image className={styles.image} src={item.img} alt="" fill />
       </div>
       <div className={styles.textContainer}>
         <div className={styles.detail}>
-          <span className={styles.date}>11.02.23 - </span>
-          <span className={styles.category}>Culture</span>
+          <span className={styles.date}>{item.date}</span>
+          <span className={styles.category}>{item.category}</span>
         </div>
         <Link href="/">
           <h1 className={styles.title}>

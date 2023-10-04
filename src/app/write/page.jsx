@@ -15,7 +15,7 @@ const Write = () => {
   if (status === "loading")
     return <div className={styles.loading}>Loading...</div>;
 
-  if (status === "authenticated") router.push("/");
+  if (status === "unauthenticated") router.push("/");
 
   return (
     <div className={styles.container}>

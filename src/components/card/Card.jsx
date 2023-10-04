@@ -13,15 +13,15 @@ const Card = ({key, item}) => {
       )}
       <div className={styles.textContainer}>
         <div className={styles.detail}>
-          <span className={styles.date}>{item.createdAt.substring(0, 10)}</span>
+          <span className={styles.date}>
+            {item.createdAt.substring(0, 10)} -{" "}
+          </span>
           <span className={styles.category}>{item.catSlug}</span>
         </div>
         <Link href={`/post/${item.slug}`}>
-          <h1 className={styles.title}>
-            Lorem ipsum dolor sit amet consectetur
-          </h1>
+          <h1 className={styles.title}>{item.title}</h1>
         </Link>
-        <p className={styles.desc}>{item.desc.substring(0, 60)}</p>
+        <p className={styles.desc}>{item?.desc?.substring(0, 60)}</p>
         <Link href={`/post/${item.slug}`} className={styles.link}>
           Read More.
         </Link>

@@ -3,6 +3,8 @@ import styles from "./singlePage.module.css";
 import Menu from "@/components/menu/Menu";
 import Image from "next/image";
 import Comment from "@/components/comment/Comment";
+import DeleteBtn from "@/components/deleteBtn/DeleteBtn";
+import {authSession} from "@/utils/auth";
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
@@ -17,6 +19,7 @@ const getData = async (slug) => {
 };
 const SinglePage = async ({params}) => {
   const {slug} = params;
+  const {user} = await authSession();
   const data = await getData(slug);
   return (
     <div className={styles.container}>
@@ -36,9 +39,12 @@ const SinglePage = async ({params}) => {
             )}
             <div className={styles.userTextContainer}>
               <span className={styles.username}>{data?.user.name}</span>
-              <span className={styles.date}>21.04.21</span>
+              <span className={styles.date}>
+                {data?.createdAt.substring(0, 10)}
+              </span>
             </div>
           </div>
+          {user.email === data?.userEmail && <DeleteBtn slug={slug} />}
         </div>
 
         {data?.img && (

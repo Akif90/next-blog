@@ -1,0 +1,15 @@
+.container {
+}
+
+.btn {
+  border: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: crimson;
+  color: white;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: rgba(220, 20, 60, 0.879);
+}

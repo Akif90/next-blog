@@ -35,7 +35,7 @@ const Comment = ({postSlug}) => {
       {status === "authenticated" ? (
         <div className={styles.write}>
           <textarea
-            placeholder="Write a comment"
+            placeholder="Write a comment..."
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             className={styles.input}

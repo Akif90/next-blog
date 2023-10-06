@@ -54,3 +54,25 @@ export const POST = async (req) => {
     );
   }
 };
+
+export const DELETE = async (req) => {
+  const {searchParams} = new URL(req.url);
+  const slug = searchParams.get("slug");
+  try {
+    const deletePost = prisma.post.delete({
+      where: {
+        slug,
+      },
+    });
+    const deleteComments = prisma.comment.deleteMany({
+      where: {
+        postSlug: slug,
+      },
+    });
+    const transaction = await prisma.$transaction([deleteComments, deletePost]);
+    console.log(transaction);
+    return new NextResponse({msg: "Succesfully deleted", status: 200});
+  } catch (error) {
+    return new NextResponse({msg: "Something went wrong"});
+  }
+};

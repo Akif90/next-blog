@@ -88,7 +88,7 @@ const Write = () => {
         catSlug: catSlug || "style",
       }),
     });
-    console.log(res);
+    router.push("/");
   };
   if (status === "loading")
     return <div className={styles.loading}>Loading...</div>;

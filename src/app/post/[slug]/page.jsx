@@ -44,7 +44,7 @@ const SinglePage = async ({params}) => {
               </span>
             </div>
           </div>
-          {user.email === data?.userEmail && <DeleteBtn slug={slug} />}
+          {user.email === data?.userEmail && <DeleteBtn slug={data.slug} />}
         </div>
 
         {data?.img && (

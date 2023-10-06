@@ -46,3 +46,18 @@ export const POST = async (req) => {
     );
   }
 };
+export const DELETE = async (req) => {
+  const {searchParams} = new URL(req.url);
+  const id = searchParams.get("id");
+  try {
+    const comment = await prisma.comment.delete({
+      where: {
+        id,
+      },
+    });
+    console.log(comment);
+    return new NextResponse({msg: "Succesfully deleted", status: 200});
+  } catch (error) {
+    return new NextResponse({msg: "Something went wrong"});
+  }
+};

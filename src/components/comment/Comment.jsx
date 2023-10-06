@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {useSession} from "next-auth/react";
 import useSWR from "swr";
+import DeleteBtn from "../deleteBtn/DeleteBtn";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -16,7 +17,7 @@ const fetcher = async (url) => {
   return data;
 };
 const Comment = ({postSlug}) => {
-  const {status} = useSession();
+  const {data: user, status} = useSession();
   const [desc, setDesc] = useState("");
   const {data, mutate, isLoading} = useSWR(
     `http://localhost:3000/api/comments?postSlug=${postSlug}`,
@@ -27,7 +28,14 @@ const Comment = ({postSlug}) => {
       method: "POST",
       body: JSON.stringify({desc, postSlug}),
     });
+    setDesc("");
     mutate();
+  };
+  const onDelete = async (id) => {
+    const res = await fetch(`/api/comments?id=${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) console.log("Error occured while deleting the post");
   };
   return (
     <div className={styles.container}>
@@ -69,6 +77,12 @@ const Comment = ({postSlug}) => {
                       {item.createdAt.substring(0, 10)}
                     </span>
                   </div>
+                  <button
+                    className={styles.delbtn}
+                    onClick={() => onDelete(item.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
                 <div className={styles.desc}>{item.desc}</div>
               </div>

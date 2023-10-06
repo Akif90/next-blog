@@ -6,7 +6,7 @@ import {useRouter} from "next/navigation";
 const DeleteBtn = ({slug}) => {
   const router = useRouter();
   const onDelete = async () => {
-    const res = await fetch(`/api/posts/${slug}`, {
+    const res = await fetch(`/api/posts?slug=${slug}`, {
       method: "DELETE",
     });
     if (res.ok) router.push("/");

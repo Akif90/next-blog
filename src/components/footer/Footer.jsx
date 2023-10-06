@@ -22,7 +22,6 @@ const Footer = () => {
           <Image src="/facebook.png" alt="" width={18} height={18} />
           <Image src="/instagram.png" alt="" width={18} height={18} />
           <Image src="/tiktok.png" alt="" width={18} height={18} />
-          <Image src="/google.png" alt="" width={18} height={18} />
         </div>
       </div>
       <div className={styles.links}>

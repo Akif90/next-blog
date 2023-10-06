@@ -1,16 +1,12 @@
-.container {
-}
-
 .btn {
   border: none;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: crimson;
-  cursor: pointer;
+  background-color: rgb(20, 110, 237);
   color: white;
+  cursor: pointer;
   border-radius: 5px;
 }
-
 .btn:hover {
-  background-color: rgba(220, 20, 60, 0.879);
+  background-color: rgba(20, 110, 237, 0.473);
 }

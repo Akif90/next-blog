@@ -52,6 +52,18 @@
   object-fit: cover;
 }
 
+.btn {
+  border: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: rgb(20, 110, 237);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn:hover {
+  background-color: rgba(20, 110, 237, 0.473);
+}
 .content {
   display: flex;
   gap: 50px;

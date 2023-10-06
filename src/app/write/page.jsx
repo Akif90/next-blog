@@ -5,7 +5,7 @@ import Image from "next/image";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import {useSession} from "next-auth/react";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {
   getStorage,
   ref,
@@ -13,17 +13,31 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "@/utils/firebase";
+import useSWR from "swr";
 
 const storage = getStorage(app);
-
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!res.ok) {
+    const error = new Error(data.message);
+    throw error;
+  }
+  return data;
+};
 const Write = () => {
   const router = useRouter();
-
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("slug");
+  const {data, mutate, isLoading} = useSWR(
+    `http://localhost:3000/api/posts/${slug}`,
+    fetcher
+  );
   const {status} = useSession();
   const [open, setOpen] = useState(false);
   const [media, setMedia] = useState("");
-  const [value, setValue] = useState("");
-  const [title, setTitle] = useState("");
+  const [value, setValue] = useState(data?.desc);
+  const [title, setTitle] = useState(data?.title);
   const [file, setFile] = useState(null);
   const [catSlug, setCatSlug] = useState("");
   useEffect(() => {
@@ -78,7 +92,7 @@ const Write = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
-    const res = fetch("/api/posts", {
+    const res = fetch(`/api/posts?slug=${data?.slug}`, {
       method: "POST",
       body: JSON.stringify({
         title,

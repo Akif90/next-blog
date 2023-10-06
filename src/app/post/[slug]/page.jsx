@@ -5,6 +5,7 @@ import Image from "next/image";
 import Comment from "@/components/comment/Comment";
 import DeleteBtn from "@/components/deleteBtn/DeleteBtn";
 import {authSession} from "@/utils/auth";
+import EditBtn from "@/components/editBtn/EditBtn";
 
 const getData = async (slug) => {
   const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
@@ -19,7 +20,9 @@ const getData = async (slug) => {
 };
 const SinglePage = async ({params}) => {
   const {slug} = params;
-  const {user} = await authSession();
+  const userData = await authSession();
+  let user;
+  if (userData) user = userData.user;
   const data = await getData(slug);
   return (
     <div className={styles.container}>
@@ -44,7 +47,12 @@ const SinglePage = async ({params}) => {
               </span>
             </div>
           </div>
-          {user.email === data?.userEmail && <DeleteBtn slug={data.slug} />}
+          {user?.email === data?.userEmail && (
+            <div style={{display: "flex", gap: "10px"}}>
+              <DeleteBtn slug={data.slug} />
+              <EditBtn slug={slug} />
+            </div>
+          )}
         </div>
 
         {data?.img && (

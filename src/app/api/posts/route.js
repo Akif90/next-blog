@@ -32,7 +32,8 @@ export const GET = async (req) => {
 
 export const POST = async (req) => {
   const session = await authSession();
-
+  const {searchParams} = new URL(req.url);
+  const slug = searchParams.get("slug");
   if (!session) {
     return new NextResponse(
       JSON.stringify({msg: "Not Authenticated"}, {status: 401})
@@ -40,12 +41,25 @@ export const POST = async (req) => {
   }
   try {
     const body = await req.json();
-    const post = await prisma.post.create({
-      data: {
-        ...body,
-        userEmail: session.user.email,
-      },
-    });
+
+    if (!slug) {
+      const post = await prisma.post.create({
+        data: {
+          ...body,
+          userEmail: session.user.email,
+        },
+      });
+    } else {
+      await prisma.post.update({
+        where: {
+          slug,
+        },
+        data: {
+          ...body,
+          userEmail: session.user.email,
+        },
+      });
+    }
     return new NextResponse(JSON.stringify(post, {status: 200}));
   } catch (error) {
     console.log(error);
